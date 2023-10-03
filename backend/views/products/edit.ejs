@@ -1,0 +1,125 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit</title>
+</head>
+<body>
+    <h1>Edit your Product</h1>
+    <form action="/product/<%= product._id %>?_method=PUT" method="POST">
+        <label for="name">Product Name</label>
+        <input id="name" type="text" name="name" placeholder="Product name" value="<%= product.name %>"> 
+        <label for="price">Price</label>
+        <input id="price" type="text" name="price" placeholder="Product price" value="<%= product.price %>"> 
+        <label for="category">Category</label>
+        <select name="category" id="category">
+            
+            <% for(let category of categories) { %>
+                <option value="<%= category %>"<%= product.category === category ? 'selected' : ''  %> ><%=category  %></option>
+                <% } %>
+                
+            </select>
+            <br>
+            <button>Submit</button>
+        </form>
+        <a href="/product">See all products</a>
+    </body>
+    </html>
+    
+    
+     -->
+    
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 70%;
+            max-width: 500px;
+        }
+        h1 {
+            text-align: center;
+            color: #006699;
+            margin-bottom: 20px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            margin-bottom: 5px;
+            color: #333;
+        }
+        input, select {
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        button {
+            background-color: #006699;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+            width: 100%;
+            text-align: center;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #005688;
+        }
+        a {
+            text-decoration: none;
+            color: #006699;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Edit your Product</h1>
+        <form action="/product/<%= product._id %>?_method=PUT" method="POST">
+            <label for="name">Product Name</label>
+            <input id="name" type="text" name="name" placeholder="Product name" value="<%= product.name %>"> 
+            <label for="price">Price</label>
+            <input id="price" type="text" name="price" placeholder="Product price" value="<%= product.price %>"> 
+            <label for="category">Category</label>
+            <select name="category" id="category">
+                <option value="None" selected>None</option>
+                <% for(let category of categories) { %>
+                <option value="<%= category %>"<%= product.category === category ? 'selected' : ''  %> ><%=category  %></option>
+                <% } %>
+            </select>
+            <br>
+            <button>Submit</button>
+        </form>
+        <a href="/farms/<%= product.farm._id %>">See all products</a>
+    </div>
+</body>
+</html>

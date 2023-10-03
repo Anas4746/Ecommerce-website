@@ -1,0 +1,117 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Farms</title>
+</head>
+<body>
+    <h1>Add your Farms</h1>
+    <form action="/farms" method="post">
+        <label for="name">Farm Name</label>
+        <input id="name" type="text" name="name" placeholder="Farm name"> 
+        <label for="address">Farm address</label>
+        <input id="address" type="text" name="address" placeholder="address name"> 
+        <label for="email">Farm Name</label>
+        <input id="email" type="email" name="email" placeholder="Email id"> 
+        <button>Submit</button>
+    </form>
+    <a href="/farms">See all Shops</a>
+</body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Farms</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 70%;
+            max-width: 500px;
+        }
+        h1 {
+            text-align: center;
+            color: #006699;
+            margin-bottom: 20px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            color: #333;
+            margin-bottom: 5px;
+        }
+        input {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        button {
+            background-color: #5cb85c;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+            width: 100%;
+            text-align: center;
+        }
+        button:hover {
+            background-color: #4cae4c;
+        }
+        a {
+            text-decoration: none;
+            color: #006699;
+            margin-top: 10px;
+            text-align: center;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        #image{
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Add your Shops</h1>
+        <form action="/farms" method="post" enctype="multipart/form-data">
+            <label for="name">Shop Name</label>
+            <input id="name" type="text" name="name" placeholder="Farm name" required>
+            <span></span>
+            <label for="address">Address</label>
+            <input id="address" type="text" name="address" placeholder="address" required>
+            <span></span>
+            <label for="image">Upload image</label>
+            <input id="image" type="file" name="image" required>
+            <span></span>
+            <label for="email">Email</label>
+            <input id="email" type="email" name="email" placeholder="Email address" required>
+            <span></span>
+            
+            <button>Submit</button>
+        </form>
+        <a href="/farms">See all Shops</a>
+    </div>
+</body>
+</html>

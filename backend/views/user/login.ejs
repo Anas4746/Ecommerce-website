@@ -1,0 +1,106 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User</title>
+</head>
+<body>
+    <h1>login</h1>
+    <form action="/login" method="post">
+        <label for="name">Name</label>
+        <input id="name" type="text" name="username" placeholder="Enter name"> 
+        <label for="password">Password</label>
+        <input id="password" type="password" name="password" placeholder="password"> 
+        <button>Login</button>
+    </form>
+    <a href="/register">Register</a>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 70%;
+            max-width: 400px;
+            
+        }
+        h1 {
+            color: #006699;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        input {
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        a {
+            color: #006699;
+            text-decoration: none;
+            margin-top: 10px;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        #loginError{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Login</h1>
+        <form action="/login" method="post">
+            <label for="email">Email id:</label>
+            <input id="email" type="email" name="email" placeholder="email">
+            <label for="password">Password</label>
+            <input id="password" type="password" name="password" placeholder="Password">
+            <span id="loginError"><%= loginError %></span> <br>
+            <button>Login</button>
+        </form>
+        <a href="/register">Register</a> <br>
+        <a href="/farms">See all shops</a>
+    </div>
+</body>
+</html>
+

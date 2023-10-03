@@ -11,3 +11,8 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.card-fixed-height {
+  height: 300px; /* Adjust the height as per your preference */
+}
+

@@ -1,0 +1,207 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= farm.name %></title>
+</head>
+<body>
+    <h1><%= farm.name %></h1>
+    <ul>
+        <li>address: <%= farm.address %></li>
+        <li>Email: <%= farm.email %></li>
+    </ul>
+    <h2>Products:</h2>
+
+    <ul> <% for(product of farm.products) { %>
+        <li><a href="/product/<%= product._id %>"><%= product.name %></a>
+            
+        </li>
+        <% } %>
+        
+    </ul>
+    <form action="/farms/<%= farm._id %>?_method=DELETE" method="POST">
+        <button>Delete Shop</button>
+    <a href="/farms/<%= farm._id %>/products/new">Add a product</a> <br><br><br>
+    <a href="/farms">Show all Shops</a> 
+    
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= farm.name %></title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 70%;
+            max-width: 500px;
+        }
+        h1 {
+            text-align: center;
+            color: #006699;
+            margin-bottom: 15px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin-bottom: 10px;
+            list-style-type: none;
+        }
+        a {
+            text-decoration: none;
+            color: #006699;
+        }
+        button {
+            background-color: #d9534f;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 15px;
+            display: block;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #c9302c;
+        }
+        .actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+        }
+        .add-product-button, .show-all-button, .delete-button {
+            background-color: #5cb85c;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+            width: 100%;
+            text-align: center;
+        }
+        .add-product-button:hover, .show-all-button:hover, .delete-button:hover {
+            background-color: #4cae4c;
+        }
+        .show-all-button {
+            background-color: #e4d445; /* Yellow Color */
+        }
+        .show-all-button:hover {
+            background-color: #e4d445;
+        }
+        .delete-button {
+            background-color: #d9534f; /* Red Color */
+        }
+        .delete-button:hover {
+            background-color: #c9302c;
+        }
+        
+        img{
+            width: 100px;
+            height: 100px;
+        }
+        .product-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            padding: 10px;
+            margin: 10px;
+            margin-bottom: 20px;
+        }
+
+        .product-image {
+            flex-shrink: 0;
+            margin-right: 15px;
+        }
+
+        .product-details {
+            flex: 1;
+        }
+        .product-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+
+        .product-image {
+            flex-shrink: 0;
+            margin-right: 20px;
+        }
+        .product-details {
+            flex: 1;
+        }
+        .product-list {
+            list-style: decimal; /* Numbered list style */
+            padding-left: 20px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1><%= farm.name %></h1>
+        <ul>
+            <li>Address: <%= farm.address %></li>
+            <li>Email: <%= farm.email %></li>
+        </ul>
+        <h2>Products:</h2>
+        <% for(product of farm.products) { %>
+        <div class="product-card">
+            <div class="product-item">
+                <div class="product-image">
+                    <a <% if(isOwner){ %> href="/product/<%= product._id %>" <% } %>>
+                        <img id="product_img" src="http://localhost:5000/<%= product.image %>">
+                    </a>
+                </div>
+                <div class="product-details">
+                    <ul class="product-list">
+                        <li><a <% if(isOwner){ %>  href="/product/<%= product._id %>" <% } %>><%= product.name %></a></li>
+                        <li>Price: $<%= product.price %></li>
+                        <li>Category: <%= product.category %></li>
+                    </ul>
+                </div>
+                <div>
+                    <form action="/farms/<%= farm._id %>" method="POST">
+                        <button>Buy Now</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <% } %>
+        </ul>
+        <div class="actions">
+            <% if(isOwner){ %>    
+            <a href="/farms/<%= farm._id %>/products/new"><button class="add-product-button">Add a product</button></a>
+            <form action="/farms/<%= farm._id %>?_method=DELETE" method="POST">
+                <button class="delete-button">Delete Shop</button>    
+            </form>
+            <% } %>
+ 
+        </div>
+        
+        <button class="show-all-button" onclick="window.location.href='/farms'">Show all Shops</button>
+    </div>
+</body>
+</html>
+
+

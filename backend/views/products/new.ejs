@@ -1,0 +1,136 @@
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add product</title>
+</head>
+<body>
+    <h1>Add your Product</h1>
+    <form action="/farms/<%= id %>/product" method="post">
+        <label for="name">Product Name</label>
+        <input id="name" type="text" name="name" placeholder="Product name"> 
+        <label for="price">Price</label>
+        <input id="price" type="text" name="price" placeholder="Product price"> 
+        <label for="category">Product type</label>
+        <select name="category" id="category">
+            <option value="None" selected>None</option>
+            <% for(let category of categories) { %>
+                <option value="<%= category %>"><%=category  %></option>
+                <% } %>
+        </select>
+        <br>
+        <button>Submit</button> 
+    </form> <br>
+    <a href="/farms/<%= id %>">See all products</a> <br><br><br>
+    <a href="/farms">See all Showps</a>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add product</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 70%;
+            max-width: 500px;
+        }
+        h1 {
+            text-align: center;
+            color: #006699;
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333;
+        }
+        input[type="text"], select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+        select {
+            background-color: white;
+            color: #333;
+        }
+        button {
+            background-color: #5cb85c;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+            width: 100%;
+            text-align: center;
+            display: block;
+        }
+        button:hover {
+            background-color: #4cae4c;
+        }
+        .back-links {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        .back-link {
+            background-color: #006699;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+        .back-link:hover {
+            background-color: #005588;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Add your Product</h1>
+        <form action="/farms/<%= id %>/product" method="post" enctype="multipart/form-data">
+            <label for="name">Product Name</label>
+            <input id="name" type="text" name="name" placeholder="Product name" required> 
+            <label for="price">Price</label>
+            <input id="price" type="text" name="price" placeholder="Product price" required> 
+            <label for="category">Product type</label>
+            <select name="category" id="category">
+                <option value="None" selected>None</option>
+                <% for(let category of categories) { %>
+                <option value="<%= category %>"><%=category  %></option>
+                <% } %>
+            </select>
+            <label for="product-image">Upload image</label>
+            <input id="product-image" type="file" name="product-image" required> <br><br>
+            <button>Submit</button> 
+        </form>
+        <div class="back-links">
+            <a href="/farms/<%= id %>" class="back-link">See all products</a>
+            <a href="/farms" class="back-link">See all Shops</a>
+        </div>
+    </div>
+</body>
+</html>
+
+
