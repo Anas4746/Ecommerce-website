@@ -16,14 +16,14 @@ export default function CartProductState(props) {
             }
         })
         const data = await response.json()
-        // console.log(data)
         // console.log(data.cartProduct.filter((product) => { return product }))
-        setCartProducts(data)
+        setCartProducts(data.cartProduct)
     }
     // console.log(cartProducts)
 
     // Add cartProduct
     const AddCartProduct = async (product_id) => {
+        console.log(product_id)
         const response = await fetch(`${host}/cartProduct`, {
             method: "POST",
             headers: {
@@ -35,22 +35,24 @@ export default function CartProductState(props) {
             })
         })
         const data = await response.json()
-        // console.log(data)
+        console.log(data.cartProduct)
         // console.log(data.cartProduct.filter((product) => { return product }))
         if (data) {
             if (data.CartPosition) {
                 alert(data.CartPosition)
-            } else {
+            } else if (data.cartProduct) {
+                setCartProducts(data.cartProduct)
                 alert('Product Added in your cart.')
             }
         } else {
             alert('Product not Added')
         }
-        setCartProducts(data)
+
     }
 
     // Remove cartProduct
     const RemoveCartProduct = async (product_id) => {
+        console.log(product_id)
         const response = await fetch(`${host}/cartProduct/${product_id}`, {
             method: "Delete",
             headers: {

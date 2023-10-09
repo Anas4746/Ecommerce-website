@@ -27,10 +27,11 @@ export default function Shop() {
                                     <div className="container">
                                         <img src={`./images/${shop.image}`} alt={`${shop.image}`} className="shop-card-image" />
                                     </div>
-                                    <div className="container">
-                                        <Link to={`/shopProducts/${shop._id}`}><h5 className="card-title">{shop.name}</h5></Link>
-                                        <p className="card-text">{shop.address}</p>
-                                        <p className="card-text">{shop.email}</p>
+                                    <div className="container my-3">
+                                        <p>
+                                            <h5 className="card-title ">Shop Name: <Link to={`/shopProducts/${shop._id}`}>{shop.name}</Link></h5></p>
+                                        <p className="card-text">Address: {shop.address}</p>
+                                        <p className="card-text">Owner email: {shop.email}</p>
                                     </div>
                                     {/* <div className="d-flex justify-content-between my-3">
                                         <MdOutlineDeleteOutline onClick={() => { deleteShop(shop._id) }} />

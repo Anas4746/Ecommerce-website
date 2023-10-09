@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
-import { CgProfile } from 'react-icons/cg'
+import { FaRegUser } from 'react-icons/fa'
+import { AiOutlineShop } from 'react-icons/ai'
 // import User from './User'
 import { LiaShoppingCartSolid } from 'react-icons/lia'
 import userContext from '../context/Users/userContext'
@@ -10,27 +11,7 @@ export default function Navbar() {
     // const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem('token'));
     const { getUser, user } = useContext(userContext)
     const navigate = useNavigate()
-    const [displayCard, setdisplayCard] = useState('none')
-
-    // useEffect(() => {
-    //     const token = localStorage.getItem('token');
-    //     console.log('Token:', token);
-    //     setIsLoggedIn(!!token);
-    // }, [isLoggedIn]);
-
-    // useEffect(() => {
-    //     // Periodically check localStorage for changes
-    //     const checkLocalStorage = () => {
-    //         const token = localStorage.getItem('token');
-    //         setIsLoggedIn(!!token);
-    //     };
-
-    //     // Set up an interval to check localStorage every few seconds
-    //     const interval = setInterval(checkLocalStorage, 2000); // Check every 2 seconds
-
-    //     // Clear the interval when the component unmounts
-    //     return () => clearInterval(interval);
-    // }, [isLoggedIn]);
+    const [displayCard, setdisplayCard] = useState()
 
     useEffect(() => {
         if (localStorage.getItem('token')) {
@@ -41,15 +22,12 @@ export default function Navbar() {
     }, [displayCard])
 
     const userProfile = () => {
-        if (displayCard === 'none') {
-            setdisplayCard('block')
-        } else if (displayCard === 'block') {
-            setdisplayCard('none')
-        }
+        setdisplayCard('get')
     }
 
     const logout = () => {
         localStorage.removeItem('token')
+        getUser()
         navigate('/')
         setdisplayCard('none')
     }
@@ -59,17 +37,36 @@ export default function Navbar() {
             <nav className="navbar navbar-expand-lg bg-light">
 
                 <NavLink className="navbar-brand" to="/"><h2 className='text-bold mx-5' style={{ color: '#820000' }}>Shofy.</h2></NavLink>
-                <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="true" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
 
-                <form className="form-inline my-2 my-lg-0 d-flex justify-content-between">
+                <div className="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul className="navbar-nav mr-auto">
+                        <li className="nav-item active">
+                            <NavLink className="nav-link" to="/">Home </NavLink>
+                        </li>
+                        <li className="nav-item">
+                            <NavLink className="nav-link" to="/shops">Shops</NavLink>
+                        </li>
+                        <li className="nav-item">
+                            <NavLink className="nav-link" to="/about">About</NavLink>
+                        </li>
+                    </ul>
+                </div>
 
-                    <input className="form-control mr-sm-2 mx-2" type="search" placeholder="Search" aria-label="Search" />
-                    <button className="btn btn-outline-success mx-3 my-sm-0" type="submit">Search</button>
+                <form className="form-inline my-2 my-lg-0 d-flex justify-content-between mx-5">
+
+                    <input className="form-control display-2" type="search" placeholder="Search" aria-label="Search" style={{ width: '400px' }} />
+                    <button className="btn btn-outline-success mx-1 my-sm-0 c display-6">Search</button>
+
                 </form>
-
-                <NavLink className='nav-link mx-2' to={localStorage.getItem('token') ? '/addShop' : '/login'}><button type="button" className="btn btn-success">{!localStorage.getItem('token') ? 'Become a Seller' : 'Create your Shop'}</button></NavLink>
+                <NavLink className='nav-link mx-2 ' to={localStorage.getItem('token') ? '/addShop' : '/login'}><button type="button" className="btn border-0">{!localStorage.getItem('token') ? 'Become a Seller' : (
+                    <span >
+                        <AiOutlineShop className='display-6 me-1' />
+                        Create Your Shop
+                    </span>
+                )}</button></NavLink><span > | </span>
                 {!localStorage.getItem('token') ?
                     <div className="">
                         <NavLink className="btn btn-primary " to="/login" role="button">Login</NavLink>
@@ -77,43 +74,37 @@ export default function Navbar() {
                     </div>
                     :
                     <div className="">
-                        <NavLink className="btn btn-primary " to="/userShop" role="button">Your Shops</NavLink>
-                        <NavLink className="btn btn-light mx-3" onClick={userProfile} ><CgProfile /></NavLink>
+                        <NavLink className="btn mx-2 border-0 " to="/userShop" role="button">Your Shops</NavLink>
+                        <NavLink className="mx-3" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdropUser" onClick={userProfile}><FaRegUser className="text-black"
+                            style={{ fontSize: '25px' }} /></NavLink>
                     </div>
                 }
 
-                <NavLink className="btn btn-warning " to={localStorage.getItem('token') ? '/userCart' : '/login'} >
-                    <LiaShoppingCartSolid className="display-8" />
+                <NavLink to={localStorage.getItem('token') ? '/userCart' : '/login'} >
+                    <LiaShoppingCartSolid className="display-6 text-danger" /><sup className="me-4 text-black text-decoration-none"><span style={{ fontSize: 'large' }}>{user.cartProduct ? user.cartProduct.length : 0}</span></sup>
                 </NavLink>
-                <span class="badge rounded-pill bg-danger badge-light" style={{ marginLeft: '0px', fontWeight: '400', marginBottom: '50px' }}>{user.cartProduct ? user.cartProduct.length : 0}</span>
 
-                <div className={`container d-${displayCard}`}>
-                    <div className={`card`}>
-                        <div className="card-body">
-                            <h5 className="card-title">{user.email}</h5>
-                            <p className="card-text">{user.farms ? user.farms.length : 0}</p>
-                            <p className="card-text">0</p>
-                            <button className="btn btn-primary" onClick={logout}>Logout</button>
+
+                <div className="modal fade" id="staticBackdropUser" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div className="modal-dialog modal-dialog-centered">
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <h5 className="modal-title" id="staticBackdropLabel">{user.email}</h5>
+                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div className="modal-body">
+                                Total Shop: {user.farms ? user.farms.length : 0}
+                            </div>
+                            <div className="modal-footer">
+                                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="button" className="btn btn-primary" onClick={logout} data-bs-dismiss="modal">Logout</button>
+                            </div>
                         </div>
                     </div>
-                    {/* <User /> */}
                 </div>
+                {/* <User /> */}
+
             </nav>
-            <div className="collapse navbar-collapse d-flex" id="navbarSupportedContent">
-                <ul className="navbar-nav mr-auto">
-                    <li className="nav-item active">
-                        <NavLink className="nav-link" to="/">Home </NavLink>
-                    </li>
-                    <li className="nav-item">
-                        <NavLink className="nav-link" to="/shops">Shops</NavLink>
-                    </li>
-                    <li className="nav-item">
-                        <NavLink className="nav-link" to="/about">About</NavLink>
-                    </li>
-
-                </ul>
-
-            </div>
 
         </div>
     )

@@ -180,26 +180,25 @@ app.post('/cartProduct', getUser, async (req, res) => {
         const user_id = req.user
         const { cartProduct } = req.body
         // console.log(cartProduct)
-        const user = await User.findById(user_id).populate('cartProduct')
-        // console.log(user)
-        for (let cart of user.cartProduct) {
-            // console.log(cart.id)
-            if (cart.id === cartProduct) {
-                return res.json({ 'CartPosition': 'This product is already added in your cart.' })
-            }
+        const user = await User.findById(user_id).populate('cartProduct.product')
+        const existingCartItem = user.cartProduct.find(cart => cart.product._id.equals(cartProduct));
+        if (existingCartItem) {
+            return res.json({ 'CartPosition': 'This product is already added in your cart.' });
         }
-        user.cartProduct.push(cartProduct)
+        user.cartProduct.push({ product: cartProduct })   // Add here the quantity property in Product
         await user.save()
+        // console.log(user)
         res.json(user)
     } catch (error) {
-        res.status(500).json({ 'error': 'Internal server error' })
+        res.status(500).json({ 'error': 'Internal server error', error })
     }
 })
 
 app.get('/cartProduct', getUser, async (req, res) => {
     try {
         const user_id = req.user
-        const user = await User.findById(user_id).populate('cartProduct')
+        const user = await User.findById(user_id).populate('cartProduct.product')
+        // console.log(user.cartProduct)
         res.json({ cartProduct: user.cartProduct })
     } catch (error) {
         res.status(500).json({ 'error': 'Internal server error' })
@@ -208,16 +207,27 @@ app.get('/cartProduct', getUser, async (req, res) => {
 
 app.delete('/cartProduct/:id', getUser, async (req, res) => {
     try {
-        const user_id = req.user
-        const { id } = req.params
-        const user = await User.findById(user_id).populate()
-        await user.cartProduct.remove(id)
-        await user.save()
-        res.json(user)
-    } catch {
-        res.status(500).json({ 'error': 'internal server error' })
+        const user_id = req.user;
+        const { id } = req.params;
+
+        const user = await User.findById(user_id);
+
+        // Find the index of the item with the given id within the cartProduct array
+        const index = user.cartProduct.findIndex(cartItem => cartItem.product._id.equals(id));
+
+        if (index !== -1) {
+            // Remove the item from the cartProduct array and associated quantity
+            user.cartProduct.splice(index, 1);
+
+            await user.save();
+            res.json(user);
+        } else {
+            res.status(404).json({ 'error': 'Product not found in the cart.' });
+        }
+    } catch (error) {
+        res.status(500).json({ 'error': 'Internal server error', error });
     }
-})
+});
 
 // Farms Request render
 
