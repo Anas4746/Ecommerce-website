@@ -15,8 +15,14 @@ const userSchema = mongoose.Schema({
         ref: 'Farm'
     }],
     cartProduct: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Product'
+        product: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Product'
+        },
+        quantity: {
+            type: Number,
+            default: 1
+        }
     }]
 })
 

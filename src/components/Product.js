@@ -1,24 +1,22 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext } from 'react'
 import productContext from '../context/products_data/productContext'
 import Productitem from './Productitem'
 
 export default function Product() {
-  const { products, getProduct } = useContext(productContext)
+  const { products } = useContext(productContext)
 
-  useEffect(() => {
-    getProduct()
-  })
   return (
+    <div>
 
-    <div className="row my-3">
+      <div className="row my-3">
 
-      {products.map((product) => {
-        return <Productitem key={product._id} product={product} />
-      })}
+        {products.map((product) => {
+          return <Productitem key={product._id} product={product} />
+        })}
+
+      </div>
 
     </div>
-
-
   )
 }
 
