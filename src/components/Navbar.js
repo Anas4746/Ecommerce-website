@@ -99,7 +99,7 @@ export default function Navbar() {
                     {/* <User /> */}
                 </div>
             </nav>
-            <div className="collapse navbar-collapse" id="navbarSupportedContent">
+            <div className="collapse navbar-collapse d-flex" id="navbarSupportedContent">
                 <ul className="navbar-nav mr-auto">
                     <li className="nav-item active">
                         <NavLink className="nav-link" to="/">Home </NavLink>
