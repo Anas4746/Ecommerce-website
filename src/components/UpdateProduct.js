@@ -5,7 +5,7 @@ import { NavLink, useNavigate, useParams } from 'react-router-dom';
 
 export default function UpdateProduct() {
 
-    const { products, UpdateProdut, getProduct } = useContext(productContext)
+    const { products, UpdateProdut } = useContext(productContext)
     const { id } = useParams();
     const navigate = useNavigate()
 
@@ -13,7 +13,6 @@ export default function UpdateProduct() {
     const [productImg, setProductImg] = useState()
 
     useEffect(() => {
-        getProduct()
         for (let currentProduct of products) {
             if (currentProduct._id === id) {
                 setProduct({ Updatename: currentProduct.name, Updateprice: currentProduct.price, Updateimage: currentProduct.image, Updatedescription: currentProduct.description, farm: currentProduct.farm })
@@ -44,23 +43,24 @@ export default function UpdateProduct() {
     return (
         <div className='container my-3'>
             <div className="mb-3">
+                <form onSubmit={Update}>
+                    <label htmlFor="productName" className="form-label">Product Name</label>
+                    <input type="text" className="form-control" id="productName" name='Updatename' value={product.Updatename} onChange={onChange} />
 
-                <label htmlFor="productName" className="form-label">Product Name</label>
-                <input type="text" className="form-control" id="productName" name='Updatename' value={product.Updatename} onChange={onChange} />
+                    <label htmlFor="productPrice" className="form-label">Price</label>
+                    <input type="number" min={0} className="form-control" id="productPrice" name='Updateprice' value={product.Updateprice} onChange={onChange} />
 
-                <label htmlFor="productPrice" className="form-label">Price</label>
-                <input type="number" className="form-control" id="productPrice" name='Updateprice' value={product.Updateprice} onChange={onChange} />
+                    <label htmlFor="productImg" className="form-label">Product Image</label>
+                    <input className="form-control" type="file" id="productImg" name='Updateimage' onChange={onChange} />
 
-                <label htmlFor="productImg" className="form-label">Product Image</label>
-                <input className="form-control" type="file" id="productImg" name='Updateimage' onChange={onChange} />
+                    <label htmlFor="productDescription" className="form-label">Description</label>
+                    <input type="text" className="form-control" id="productDescription" name='Updatedescription' value={product.Updatedescription} onChange={onChange} />
 
-                <label htmlFor="productDescription" className="form-label">Description</label>
-                <input type="text" className="form-control" id="productDescription" name='Updatedescription' value={product.Updatedescription} onChange={onChange} />
+                    <NavLink className="btn btn-warning my-3 " to={`/userShop/shopProducts/${product.farm}`}>Go back to Farm</NavLink>
 
-                <NavLink className="btn btn-warning my-3 " to={`/userShop/shopProducts/${product.farm}`}>Go back to Farm</NavLink>
+                    <button type="submit" className="btn btn-success mx-3" >Update Product</button>
 
-                <button onClick={Update} type="button" className="btn btn-success mx-3" >Update Product</button>
-
+                </form>
             </div>
 
         </div>

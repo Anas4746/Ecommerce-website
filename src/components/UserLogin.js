@@ -1,11 +1,13 @@
 
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
+import userContext from '../context/Users/userContext'
 
 
 export default function UserLogin() {
 
     const [credential, setCredential] = useState({ email: '', password: '' })
+    const { getUser } = useContext(userContext)
     let navigate = useNavigate();
     const onSubmit = async (e) => {
         e.preventDefault()
@@ -24,6 +26,7 @@ export default function UserLogin() {
         if (data.success.success === true) {
             localStorage.setItem('token', data.authtoken)
             console.log(data.authtoken)
+            getUser()
             navigate('/userShop')
         } else {
             alert('Invalid credentials')

@@ -175,17 +175,20 @@ app.post('/getuser', getUser, async (req, res) => {
     }
 })
 
+// User CartProducts
+
 app.post('/cartProduct', getUser, async (req, res) => {
     try {
         const user_id = req.user
-        const { cartProduct } = req.body
+        const { cartProduct, quantity } = req.body
         // console.log(cartProduct)
         const user = await User.findById(user_id).populate('cartProduct.product')
+        const product = await Product.findById(cartProduct)
         const existingCartItem = user.cartProduct.find(cart => cart.product._id.equals(cartProduct));
         if (existingCartItem) {
             return res.json({ 'CartPosition': 'This product is already added in your cart.' });
         }
-        user.cartProduct.push({ product: cartProduct })   // Add here the quantity property in Product
+        user.cartProduct.push({ product: cartProduct, quantity: quantity, price: product.price })   // Add here the quantity property in Product
         await user.save()
         // console.log(user)
         res.json(user)
@@ -228,6 +231,52 @@ app.delete('/cartProduct/:id', getUser, async (req, res) => {
         res.status(500).json({ 'error': 'Internal server error', error });
     }
 });
+
+app.post('/addQuantity', getUser, async (req, res) => {
+    try {
+        const user_id = req.user
+        const { cartProduct } = req.body
+        // console.log(cartProduct)
+        const user = await User.findById(user_id).populate('cartProduct.product')
+        const product = await Product.findById(cartProduct)
+        const existingCartItem = user.cartProduct.find(cart => cart.product._id.equals(cartProduct));
+        if (existingCartItem) {
+            existingCartItem.price = existingCartItem.price + product.price
+            existingCartItem.quantity = existingCartItem.quantity + 1
+            await user.save()
+            // console.log(existingCartItem)
+            // console.log(user)
+            res.json(user)
+        }
+    } catch (error) {
+        res.status(500).json({ 'error': 'Internal server error', error })
+    }
+})
+
+app.post('/removeQuantity', getUser, async (req, res) => {
+    try {
+        const user_id = req.user
+        const { cartProduct } = req.body
+        // console.log(cartProduct)
+        const user = await User.findById(user_id).populate('cartProduct.product')
+        const product = await Product.findById(cartProduct)
+        const existingCartItem = user.cartProduct.find(cart => cart.product._id.equals(cartProduct));
+        if (existingCartItem) {
+            if (existingCartItem.price && existingCartItem.quantity !== 1) {
+                existingCartItem.price = existingCartItem.price - product.price
+                existingCartItem.quantity = existingCartItem.quantity - 1
+                await user.save()
+                // console.log(existingCartItem)
+                // console.log(user)
+                res.json(user)
+            }
+        } else {
+            res.json(user)
+        }
+    } catch (error) {
+        res.status(500).json({ 'error': 'Internal server error', error })
+    }
+})
 
 // Farms Request render
 
@@ -283,8 +332,8 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 app.post('/farms', getUser, upload.single('image'), verifyShop, async (req, res) => {
-    console.log(req.body);
-    console.log(req.file);
+    // console.log(req.body);
+    // console.log(req.file);
     const img = req.file
     const farm = new Farm(req.body);
     const user = await User.findById(req.user);
@@ -304,17 +353,17 @@ app.post('/farms', getUser, upload.single('image'), verifyShop, async (req, res)
 app.put('/farms/:id', getUser, upload.single('image'), async (req, res) => {
     try {
         const { id } = req.params
-        console.log(req.body)
+        // console.log(req.body)
         // console.log(id)
-        console.log(req.file)
+        // console.log(req.file)
 
         const farm = await Farm.findByIdAndUpdate(id, req.body, { runValidators: true, new: true })
-        console.log(farm)
+        // console.log(farm)
         if (req.file) {
             farm.image = req.file.filename
             await farm.save()
         }
-        console.log(farm)
+        // console.log(farm)
         //res.redirect(`/product/${product._id}`)
         // success.success = true
         res.status(200).json({ farm })
@@ -341,8 +390,8 @@ const verifyProduct = (req, res, next) => {
 
 app.post('/farms/:id/product', upload.single('image'), verifyProduct, async (req, res) => {
     const { name, price, description } = req.body;
-    console.log(req.body);
-    console.log(req.file);
+    // console.log(req.body);
+    // console.log(req.file);
     const product_image = req.file.filename;
     // console.log(product_image);
     const product = new Product({ name, price, description });
@@ -389,7 +438,7 @@ app.delete('/farms/:id', async (req, res) => {
         res.status(200).json(Farms)
     } catch (error) {
         res.status(500).json({ error: 'An error occurred while deleting the farm and products.', });
-        console.log(error)
+        // console.log(error)
     }
 });
 
@@ -472,11 +521,13 @@ app.get('/product/:id', loginRequire, async (req, res) => {
 app.put('/product/:id', upload.single('image'), async (req, res) => {
     try {
         const { id } = req.params
-        const img = req.file
+
         const product = await Product.findByIdAndUpdate(id, req.body, { runValidators: true, new: true })
-        product.image = img.filename
-        await product.save()
-        console.log(product)
+        if (req.file) {
+            product.image = req.file.filename
+            await product.save()
+        }
+        // console.log(product)
         // res.redirect(`/product/${product._id}`)
         res.json(product)
     } catch (e) {

@@ -11,14 +11,12 @@ export default function User() {
     const [displayCard, setdisplayCard] = useState('block')
     // const [logout, setlogout] = useState(false)
 
-
     const logout = () => {
         navigate('about')
         localStorage.removeItem('token')
         setdisplayCard('none')
 
     }
-
 
     // useEffect(() => {
     //     const fetchUsers = async () => {
@@ -38,13 +36,11 @@ export default function User() {
     // }, [])
 
     useEffect(() => {
-        if (localStorage.getItem('token')) {
-            console.log('User Details')
-            getUser()
+        if (localStorage.getItem('token') && !user.email) {
+            console.log('User Details');
+            getUser();
         }
-
-        // eslint-disable-next-line
-    }, [])
+    }, [getUser, user.email]); //getUser, user.email
 
     // console.log(user)
 

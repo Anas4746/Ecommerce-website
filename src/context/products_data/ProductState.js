@@ -33,6 +33,7 @@ export default function Products(props) {
         })
         const json = await response.json();
         setshopProduct(json)
+        getProduct()
     }
 
     //Add Product
@@ -54,8 +55,8 @@ export default function Products(props) {
         const data = await response.json();
         console.log(data)
         if (data) {
+            getShopProducts(shop_id)
             alert('Product Added')
-
         } else {
             alert('Product not Added')
         }
@@ -63,12 +64,12 @@ export default function Products(props) {
 
     // Update Product
     const UpdateProdut = async (product_id, product, productImg) => {
-        console.log(product_id, product.Updatename, product.Updateprice, product.Updatedescription, productImg)
+        console.log(product_id, product.Updatename, product.Updateprice, product.Updateimage, product.Updatedescription, productImg)
         const formData = new FormData();
         formData.append('name', product.Updatename)
         formData.append('price', product.Updateprice)
         formData.append('description', product.Updatedescription)
-        formData.append('image', productImg ? productImg : product.image)
+        formData.append('image', productImg ? productImg : product.Updateimage)
         const response = await fetch(`${host}/product/${product_id}`, {
             method: 'PUT',
             headers: {

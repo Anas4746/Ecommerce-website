@@ -43,11 +43,12 @@ export default function Shopstate(props) {
         const data = await response.json()
         console.log(data)
         if (data) {
+            getShop()
+            userShop()
             // window.alert('Shop added')
         } else {
             window.alert('Shop not add')
         }
-
         //setShops(shops.concat(data))
     }
 
@@ -71,6 +72,8 @@ export default function Shopstate(props) {
         if (data) {
             console.log(data)
             window.alert('Shop successfully Updated')
+            getShop();
+            userShop();
         } else {
             window.alert('Shop Not Update')
         }
@@ -104,9 +107,12 @@ export default function Shopstate(props) {
         if (!data) {
             window.alert('Shop not deleted')
         } else {
+            userShop()
             window.alert('Shop successfully deleted')
         }
         setShops(data)
+
+
     }
 
     // User Shop

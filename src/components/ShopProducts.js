@@ -1,10 +1,12 @@
 
 import React, { useContext, useEffect } from 'react'
 import productContext from '../context/products_data/productContext'
+import CartProductContext from '../context/cartProduct/CartProductContext'
 import { useParams } from 'react-router-dom';
 
 export default function ShopProducts() {
     const { shopProduct, getShopProducts } = useContext(productContext)
+    const { AddCartProduct } = useContext(CartProductContext)
     const { shop_id } = useParams();
     useEffect(() => {
         getShopProducts(shop_id)
@@ -24,7 +26,7 @@ export default function ShopProducts() {
                                     <div className="container justify-content-between ">
                                         <img src={`/images/${product.image}`} alt={product.image} style={{ minWidth: '120px', maxWidth: '120px', minHeight: '120px', maxHeight: '120px' }} className="img-thumbnail" />
                                         <div className="d-flex justify-content-between my-3">
-                                            <h5 className="card-title">{product.name} - <p className="card-text">${product.price}</p></h5>
+                                            <h5 className="card-title">{product.name} - <p className="card-text">₹{product.price.toLocaleString()}</p></h5>
                                         </div>
 
                                         <div>
@@ -53,7 +55,7 @@ export default function ShopProducts() {
                                                 </div>
                                             </p></div>
                                         <div className="d-flex justify-content-between">
-                                            <a href="/" className="btn btn-warning">Add to card</a>
+                                            <button onClick={() => { AddCartProduct(product._id) }} className={`btn btn-warning `}>Add to card</button>
                                             <a href="/" className="btn btn-danger">Buy Now</a>
                                         </div>
                                     </div>

@@ -1,3 +1,4 @@
+
 import React, { useContext, useEffect, useState } from 'react'
 import shopContext from '../context/shops/shopContext'
 import { useParams, useNavigate } from 'react-router-dom';
@@ -42,21 +43,23 @@ export default function UpdateShop() {
     return (
         <div className='container my-3'>
             <div className="mb-3">
+                <form>
+                    <label htmlFor="shopName" className="form-label">Shop Name</label>
+                    <input type="text" className="form-control" id="shopName" name='Updatename' value={shop.Updatename} onChange={onChange} />
 
-                <label htmlFor="shopName" className="form-label">Shop Name</label>
-                <input type="text" className="form-control" id="shopName" name='Updatename' value={shop.Updatename} onChange={onChange} />
+                    <label htmlFor="shopAddress" className="form-label">Address</label>
+                    <input type="text" className="form-control" id="shopAddress" name='Updateaddress' value={shop.Updateaddress} onChange={onChange} />
+                    {/* value={shop.Updateimage} */}
+                    <label htmlFor="shopImg" className="form-label">Shop Image</label>
+                    <input className="form-control" type="file" id="shopImg" name='Updateimage' onChange={onChange} />
 
-                <label htmlFor="shopAddress" className="form-label">Address</label>
-                <input type="text" className="form-control" id="shopAddress" name='Updateaddress' value={shop.Updateaddress} onChange={onChange} />
-                {/* value={shop.Updateimage} */}
-                <label htmlFor="shopImg" className="form-label">Shop Image</label>
-                <input className="form-control" type="file" id="shopImg" name='Updateimage' onChange={onChange} />
+                    <label htmlFor="ownerEmail" className="form-label">Email address</label>
+                    <input type="email" className="form-control" id="ownerEmail" name='Updateemail' value={shop.Updateemail} onChange={onChange} />
 
-                <label htmlFor="ownerEmail" className="form-label">Email address</label>
-                <input type="email" className="form-control" id="ownerEmail" name='Updateemail' value={shop.Updateemail} onChange={onChange} />
+                    <button onClick={Update} type="button" className="btn btn-success" >Update Shop</button>
 
-                <button onClick={Update} type="button" className="btn btn-success" >Update Shop</button>
 
+                </form>
             </div>
 
         </div>

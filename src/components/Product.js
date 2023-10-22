@@ -11,7 +11,7 @@ export default function Product() {
       <div className="row my-3">
 
         {products.map((product) => {
-          return <Productitem key={product._id} product={product} />
+          return <Productitem key={product._id} product={product} product_id={product._id} />
         })}
 
       </div>
