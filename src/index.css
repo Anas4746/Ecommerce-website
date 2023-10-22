@@ -1,5 +1,6 @@
 body {
   margin: 0;
+  padding: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
@@ -16,3 +17,126 @@ code {
   height: 300px; /* Adjust the height as per your preference */
 }
 
+.modal-header{
+  flex-direction: column;
+}
+
+.dropdown-menu.show {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important
+}
+
+.navbar-nav li a {
+  text-decoration: none;
+  color: black;
+  margin: 1rem;
+}
+
+.shop-card-image{
+  width: 220px;
+  height: 150px ;
+}
+
+.user_icon_cart{
+  display: flex;
+  align-items: center;
+}
+.shop-cart{
+  display: flex !important;
+}
+.cart_quantity {
+  display: flex;
+  align-items: center;
+}
+.shop_cart{
+  display: flex;
+  justify-content: space-around;
+}
+@media only screen and (max-width:992px){
+  .navbar-nav{
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: center !important;
+  }
+  .collapse:not(.show) {
+    display: flex !important;
+}
+  .container-fluid{
+    display: grid !important;
+    grid-template-columns: repeat(7, 1fr) !important;
+    align-items: center !important;
+  }
+  .navbar-brand{
+    grid-column-start: 1 !important;
+    grid-column-end: 1 !important;
+ }
+ .shop-user {
+  display: flex !important;
+}
+.sup-text{
+  margin-top: 13px !important;
+}
+}
+
+@media only screen and (max-width:824px){
+  .shop-user {
+    display: flex !important;
+  }
+  .sup-text{
+    margin-top: 13px !important;
+  }
+  .cart_product_remove_button{
+    font-size: x-small !important;
+  }
+}
+
+@media only screen and (max-width:530px){
+    .collapse:not(.show) {
+      display: none !important;
+  }
+  .navbar-toggler{
+    display: block !important;
+  }
+  .navbar-nav{
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+  }
+  .container-fluid{
+      display: flex !important;
+  }
+  .shop-card-image{
+    width: 80px !important;
+    height: 80px !important;
+  }
+  .card-title{
+    font-size: medium;
+  }
+  .card-text{
+    font-size:smaller;
+  }
+  .shop-cart{
+    display: block !important;
+  }
+  .user_dropdown {
+    margin-left: 40% !important;
+}
+.shop-card-image{
+  width: 80px !important;
+  height: 80px !important;
+}
+.shop_cart{
+  display: block !important;
+}
+.shop_cart_img{
+  display: flex !important;
+  justify-content: center !important;
+}
+.shop_cart_text{
+  display: block !important;
+  text-align: center !important;
+}
+}
+
+  

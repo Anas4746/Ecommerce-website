@@ -19,7 +19,9 @@ export default function UserState(props) {
         })
         const data = await response.json()
         // console.log(data)
-        setUser(data)
+        if (JSON.stringify(data) !== JSON.stringify(user)) {
+            setUser(data);
+        }
     }
 
     return (

@@ -23,20 +23,20 @@ export default function Shop() {
                     return <div className="col md-6" key={shop._id}>
                         <div className="card my-3" >
                             <div className="card-body">
-                                <div className="container d-flex justify-content-around">
-                                    <div className="container">
-                                        <img src={`./images/${shop.image}`} alt={`${shop.image}`} className="shop-card-image" />
+                                <div className="shop-cart container justify-content-around">
+                                    <div className="container my-3">
+                                        <Link to={`/shopProducts/${shop._id}`} style={{ textDecoration: 'none' }}>
+                                            <img src={`./images/${shop.image}`} alt={`${shop.image}`} className="shop-card-image" /></Link>
                                     </div>
                                     <div className="container my-3">
                                         <p>
-                                            <h5 className="card-title ">Shop Name: <Link to={`/shopProducts/${shop._id}`}>{shop.name}</Link></h5></p>
-                                        <p className="card-text">Address: {shop.address}</p>
-                                        <p className="card-text">Owner email: {shop.email}</p>
+                                            <Link to={`/shopProducts/${shop._id}`} style={{ textDecoration: 'none' }}>
+                                                <h5 className="card-title"><b style={{ color: 'black' }}>Shop Name: </b> {shop.name}</h5></Link></p>
+                                        <b><span>Address: </span></b>
+                                        <p className="card-text">{shop.address}</p>
+                                        <b><span>Owner email: </span></b>
+                                        <p className="card-text">{shop.email}</p>
                                     </div>
-                                    {/* <div className="d-flex justify-content-between my-3">
-                                        <MdOutlineDeleteOutline onClick={() => { deleteShop(shop._id) }} />
-                                        <Link to={`/updateShop/${shop._id}`}><BiSolidEditAlt /></Link>
-                                    </div> */}
                                 </div>
                             </div>
                         </div>

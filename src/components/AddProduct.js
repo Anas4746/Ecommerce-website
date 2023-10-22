@@ -35,7 +35,7 @@ export default function AddProduct() {
                     <input className="form-control" id='name' type="text" name="name" onChange={onChange} placeholder="Product name" required />
 
                     <label htmlFor="price" className="form-label">Price</label>
-                    <input className="form-control" id='price' type="number" name="price" onChange={onChange} placeholder="Product price" required />
+                    <input className="form-control" id='price' type="number" min={0} name="price" onChange={onChange} placeholder="Product price" required />
 
                     <label htmlFor="product_image" className="form-label">Upload image</label>
                     <input className="form-control" id='product_image' type="file" name="product_image" onChange={onChange} required />
