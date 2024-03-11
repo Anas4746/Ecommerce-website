@@ -25,7 +25,7 @@ export default function UserLogin() {
         // console.log(data)
         if (data.success.success === true) {
             localStorage.setItem('token', data.authtoken)
-            console.log(data.authtoken)
+            // console.log(data.authtoken)
             getUser()
             navigate('/userShop')
         } else {
@@ -49,7 +49,8 @@ export default function UserLogin() {
                     <label htmlFor="password" className="form-label">Password</label>
                     <input type="password" className="form-control" id="password" name='password' onChange={onChange} value={credential.password} />
                 </div>
-                <button type="submit" className="btn btn-primary">Submit</button>
+                <button type="submit" className="btn btn-primary">Login</button>
+                <button type="button" className="btn btn-danger ms-3">Demo User</button>
             </form>
         </div>
     )

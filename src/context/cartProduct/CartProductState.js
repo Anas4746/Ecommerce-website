@@ -38,6 +38,7 @@ export default function CartProductState(props) {
         })
         const data = await response.json()
         // console.log(data.cartProduct)
+        console.log(data)
         // console.log(data.cartProduct.filter((product) => { return product }))
         if (data) {
             if (data.CartPosition) {

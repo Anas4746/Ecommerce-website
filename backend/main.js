@@ -151,7 +151,10 @@ app.post('/logout', (req, res) => {
 const getUser = async (req, res, next) => {
 
     const token = req.header('auth-token')
+    // console.log(req.header('auth-token'))
+    // console.log(token)
     if (!token) {
+        console.log('token nhi hai.')
         return res.status(200).json({ "error": 'Please Login' })
     }
     try {
@@ -162,7 +165,6 @@ const getUser = async (req, res, next) => {
         // console.error('JWT Verification Error:', error);
         res.status(401).json({ "error": 'Invalid token' });
     }
-
 }
 
 app.post('/getuser', getUser, async (req, res) => {

@@ -4,6 +4,7 @@ import shopContext from '../context/shops/shopContext'
 // import { BiSolidEditAlt } from 'react-icons/bi'
 // import { MdOutlineDeleteOutline } from 'react-icons/md'
 import { Link } from 'react-router-dom'
+import './Shop.css'
 
 export default function Shop() {
     const { shops, getShop } = useContext(shopContext)
@@ -29,9 +30,9 @@ export default function Shop() {
                                             <img src={`./images/${shop.image}`} alt={`${shop.image}`} className="shop-card-image" /></Link>
                                     </div>
                                     <div className="container my-3">
-                                        <p>
+                                        <>
                                             <Link to={`/shopProducts/${shop._id}`} style={{ textDecoration: 'none' }}>
-                                                <h5 className="card-title"><b style={{ color: 'black' }}>Shop Name: </b> {shop.name}</h5></Link></p>
+                                                <h5 className="card-title"><b style={{ color: 'black' }}>Shop Name: </b> {shop.name}</h5></Link></>
                                         <b><span>Address: </span></b>
                                         <p className="card-text">{shop.address}</p>
                                         <b><span>Owner email: </span></b>

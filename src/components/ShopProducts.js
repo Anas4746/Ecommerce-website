@@ -16,7 +16,7 @@ export default function ShopProducts() {
     return (
         <div className="container">
             <div className="row my-3">
-                <h1>Shop name</h1>
+                <h1> </h1>
                 {shopProduct.length > 0 ? (
                     shopProduct.map((product) => {
 
