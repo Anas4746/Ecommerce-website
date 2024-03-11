@@ -39,9 +39,9 @@ function UserShop() {
                                             <img src={`./images/${shop.image}`} alt={`${shop.image}`} className="shop-card-image" style={{ minWidth: '220px', maxWidth: '220px', minHeight: '150px', maxHeight: '150px' }} />
                                         </div>
                                         <div className="shop_cart_text container my-2">
-                                            <h5 className="card-title">{shop.name}</h5>
-                                            <p className="card-text">{shop.address}</p>
-                                            <p className="card-text">{shop.email}</p>
+                                            <h5 className="card-title">Shop Name: {shop.name}</h5>
+                                            <p className="card-text">Address: {shop.address}</p>
+                                            <p className="card-text">Owner email: {shop.email}</p>
                                             <div className='d-flex justify-content-center'>
                                                 <Link className="btn btn-warning " to={`/userShop/shopProducts/${shop._id}`} role="button">View Products</Link>
                                                 <Link className="btn btn-danger mx-2" to={`/addProduct/${shop._id}`} role="button">Add Products</Link>

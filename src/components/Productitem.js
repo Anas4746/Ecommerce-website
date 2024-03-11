@@ -1,11 +1,22 @@
 
 import React, { useContext } from 'react'
 import CartProductContext from '../context/cartProduct/CartProductContext'
+import { useNavigate } from 'react-router-dom'
+// import { NavLink } from 'react-router-dom'
 
 export default function Productitem(props) {
-
+    const navigate = useNavigate()
     const { AddCartProduct } = useContext(CartProductContext)
     const { product, product_id } = props
+    // console.log(product_id)
+    const addProductInCart = () => {
+        if (localStorage.getItem("token")) {
+            console.log(product_id)
+            AddCartProduct(product_id)
+        } else {
+            navigate("/login")
+        }
+    }
 
     return (
 
@@ -46,7 +57,8 @@ export default function Productitem(props) {
                             </div></div>
 
                         <div className="d-flex justify-content-between">
-                            <button onClick={() => { AddCartProduct(product._id) }} className='btn btn-sm btn-warning'>Add to card</button>
+                            <button onClick={() => addProductInCart(product_id)}
+                                className='btn btn-sm btn-warning'>Add to card</button>
                             <a href="/" className="btn btn-sm btn-danger">Buy Now</a>
                         </div>
                     </div>
