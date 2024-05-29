@@ -16,7 +16,7 @@ import AddProduct from './components/AddProduct';
 import UserShopProducts from './components/UserShopProducts';
 import UpdateProduct from './components/UpdateProduct';
 import UserState from './context/Users/userState';
-import CartProductState from './context/cartProduct/CartProductState'
+import CartProductState from './context/cartProduct/CartProductState';
 import CartProduct from './components/CartProduct';
 
 function App() {

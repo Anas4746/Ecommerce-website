@@ -63,7 +63,7 @@ app.get('/register', (req, res) => {
 })
 
 app.post('/register', async (req, res) => {
-
+    let success = { success: false }
     const { email, password } = req.body;
     const userexist = await User.findOne({ email: email });
     if (!userexist) {

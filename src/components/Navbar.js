@@ -10,7 +10,7 @@ import CartProductContext from '../context/cartProduct/CartProductContext'
 export default function Navbar() {
     const { cartProducts } = useContext(CartProductContext)
     // const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem('token'));
-    const { getUser, user } = useContext(userContext)
+    const { getUser, user, userNull } = useContext(userContext)
     const navigate = useNavigate()
     // const [Useris, setUseris] = useState()
 
@@ -27,6 +27,7 @@ export default function Navbar() {
 
     const logout = () => {
         localStorage.removeItem('token')
+        userNull();
         navigate('/')
         // setdisplayCard('none')
     }
@@ -66,7 +67,8 @@ export default function Navbar() {
                                             <li><div className="modal-body">
                                                 Total Shop: {user.farms ? user.farms.length : 0}
                                             </div></li>
-                                            <li><button type="button" className="btn btn-primary mt-2" onClick={() => logout} data-bs-dismiss="modal">Logout</button></li>
+                                            {/* <li><button type="button" className="btn btn-primary mt-2" onClick={() => logout} data-bs-dismiss="modal">Logout</button></li> */}
+                                            <li><button type="button" className="btn btn-primary mt-2" onClick={logout}>Logout</button></li>
                                             <li><hr className="dropdown-divider" /></li>
                                         </>
                                     }</ul>

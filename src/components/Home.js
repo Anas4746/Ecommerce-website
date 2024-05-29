@@ -5,7 +5,7 @@ import Product from './Product'
 export default function Home() {
     //const shops = useContext(shopContext)
     const { getProduct } = useContext(productContext)
-
+    // console.log(token)
     useEffect(() => {
         getProduct()
         // eslint-disable-next-line
