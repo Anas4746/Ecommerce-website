@@ -5,7 +5,7 @@ const methodoverride = require('method-override');
 const session = require('express-session');
 const flash = require('connect-flash');
 const bcrypt = require('bcryptjs');
-var jwt = require('jsonwebtoken');;
+var jwt = require('jsonwebtoken');
 const multer = require('multer');
 var cors = require('cors')
 const mongoose = require('mongoose');
@@ -23,7 +23,7 @@ const Product = require('./models/product');
 const Farm = require('./models/farm');
 const User = require('./models/register');
 const { read } = require('fs');
-
+const GithubUser = require("./models/githubUser")
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
@@ -176,6 +176,7 @@ app.post('/getuser', getUser, async (req, res) => {
         res.status(500).json({ 'error': 'Internal server error' })
     }
 })
+
 
 // User CartProducts
 
@@ -451,8 +452,20 @@ app.post('/userShop', getUser, async (req, res) => {
     res.json(userFarms)
 })
 
-// Products Request render
+// GitHub User Data
 
+app.get('/githubUsers', async (req, res) => {
+    try {
+        const users = await GithubUser.find({})
+        res.json(users)
+    }
+    catch (err) {
+        res.send({ error: err.message, users: "Users not found" })
+    }
+})
+
+
+// Products Request render
 
 const categories = [
     "Fruits", "Vegetables", "Fresh Herbs",
