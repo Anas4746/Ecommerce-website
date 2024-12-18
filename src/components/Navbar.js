@@ -65,7 +65,7 @@ export default function Navbar() {
                                             </NavLink></li>
                                             <li><NavLink className="btn border-0 " to="/userShop" role="button">Your Shops</NavLink></li>
                                             <li><div className="modal-body">
-                                                Total Shop: {user.farms ? user.farms.length : 0}
+                                                Total Shop: {user?.farms?.length ? user?.farms?.length : 0}
                                             </div></li>
                                             {/* <li><button type="button" className="btn btn-primary mt-2" onClick={() => logout} data-bs-dismiss="modal">Logout</button></li> */}
                                             <li><button type="button" className="btn btn-primary mt-2" onClick={logout}>Logout</button></li>
@@ -73,7 +73,7 @@ export default function Navbar() {
                                         </>
                                     }</ul>
                                 <NavLink className="shop-user me-3" to={localStorage.getItem('token') ? '/userCart' : '/login'} >
-                                    <LiaShoppingCartSolid className="cart-icon display-6 text-danger" /><sup className="sup-text text-black text-decoration-none">{user.cartProduct ? user.cartProduct.length : 0}</sup>
+                                    <LiaShoppingCartSolid className="cart-icon display-6 text-danger" /><sup className="sup-text text-black text-decoration-none">{user?.cartProduct ? user?.cartProduct?.length : 0}</sup>
                                 </NavLink>
                             </div>
                         </div>

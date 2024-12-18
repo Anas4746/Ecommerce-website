@@ -30,7 +30,9 @@ export default function About() {
                     </h2>
                     <div id="collapseOne" className="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                         <div className="accordion-body">
-                            <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                            <strong>Users can create a new account to access the platform.</strong>
+                            Required fields during sign-up: Full Name, Email Address, Password <code>.accordion-body</code> Users can log in to their account using:
+                            Email Address and Password.
                         </div>
                     </div>
                 </div>
@@ -42,7 +44,8 @@ export default function About() {
                     </h2>
                     <div id="collapseTwo" className="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
                         <div className="accordion-body">
-                            <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                            <strong>After logging in, users can create their shop.</strong>
+                            Required details for shop creation: Shop Name, Shop Description, Contact Information, Shop Logo or Banner. Allow users to: Update shop details (name, description, logo).
                         </div>
                     </div>
                 </div>
@@ -54,7 +57,8 @@ export default function About() {
                     </h2>
                     <div id="collapseThree" className="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
                         <div className="accordion-body">
-                            <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                            <strong>Users can add products to their shop.</strong>Required product details: Product Name, Product Description, Product Price, Product Images. Users can:
+                            Edit product details (name, price, description, etc.), Delete products if they are no longer available.
                         </div>
                     </div>
                 </div>
