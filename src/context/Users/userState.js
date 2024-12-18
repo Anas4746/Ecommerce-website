@@ -24,9 +24,13 @@ export default function UserState(props) {
         }
     }
 
+    const userNull = () => {
+        setUser(userdata)
+    }
+
     return (
         <div>
-            <UserContext.Provider value={{ getUser, user }}>
+            <UserContext.Provider value={{ getUser, user, userNull }}>
                 {props.children}
             </UserContext.Provider>
         </div>

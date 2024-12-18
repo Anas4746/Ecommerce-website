@@ -10,7 +10,7 @@ import CartProductContext from '../context/cartProduct/CartProductContext'
 export default function Navbar() {
     const { cartProducts } = useContext(CartProductContext)
     // const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem('token'));
-    const { getUser, user } = useContext(userContext)
+    const { getUser, user, userNull } = useContext(userContext)
     const navigate = useNavigate()
     // const [Useris, setUseris] = useState()
 
@@ -27,6 +27,7 @@ export default function Navbar() {
 
     const logout = () => {
         localStorage.removeItem('token')
+        userNull();
         navigate('/')
         // setdisplayCard('none')
     }
@@ -64,14 +65,15 @@ export default function Navbar() {
                                             </NavLink></li>
                                             <li><NavLink className="btn border-0 " to="/userShop" role="button">Your Shops</NavLink></li>
                                             <li><div className="modal-body">
-                                                Total Shop: {user.farms ? user.farms.length : 0}
+                                                Total Shop: {user?.farms?.length ? user?.farms?.length : 0}
                                             </div></li>
-                                            <li><button type="button" className="btn btn-primary mt-2" onClick={() => logout} data-bs-dismiss="modal">Logout</button></li>
+                                            {/* <li><button type="button" className="btn btn-primary mt-2" onClick={() => logout} data-bs-dismiss="modal">Logout</button></li> */}
+                                            <li><button type="button" className="btn btn-primary mt-2" onClick={logout}>Logout</button></li>
                                             <li><hr className="dropdown-divider" /></li>
                                         </>
                                     }</ul>
                                 <NavLink className="shop-user me-3" to={localStorage.getItem('token') ? '/userCart' : '/login'} >
-                                    <LiaShoppingCartSolid className="cart-icon display-6 text-danger" /><sup className="sup-text text-black text-decoration-none">{user.cartProduct ? user.cartProduct.length : 0}</sup>
+                                    <LiaShoppingCartSolid className="cart-icon display-6 text-danger" /><sup className="sup-text text-black text-decoration-none">{user?.cartProduct ? user?.cartProduct?.length : 0}</sup>
                                 </NavLink>
                             </div>
                         </div>

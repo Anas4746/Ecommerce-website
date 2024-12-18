@@ -9,7 +9,6 @@ export default function AddShop() {
     const navigate = useNavigate();
     const [shopImg, setShopImg] = useState("")
 
-
     const onSubmit = (data) => {
         console.log(data)
         addShop(data.name, data.address, shopImg, data.email);

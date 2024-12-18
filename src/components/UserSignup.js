@@ -28,6 +28,10 @@ export default function UserSignup() {
   const onChange = (e) => {
     setCredential({ ...credential, [e.target.name]: e.target.value })
   }
+
+  let redirectLogin = () => {
+    navigate("/login")
+  }
   return (
     <div className='container my-5'>
       <div className="container text-center"><h1><b>Sign Up</b></h1></div>
@@ -41,6 +45,7 @@ export default function UserSignup() {
           <input type="password" className="form-control" id="password" name='password' onChange={onChange} required />
         </div>
         <button type="submit" className="btn btn-primary">Submit</button>
+        <button type="button" onClick={redirectLogin} className="mx-3 btn btn-warning">Go to login</button>
       </form>
     </div>
   )

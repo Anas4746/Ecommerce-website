@@ -7,6 +7,7 @@ import userContext from '../context/Users/userContext'
 export default function UserLogin() {
 
     const [credential, setCredential] = useState({ email: '', password: '' })
+    const domyCredential = { domyEmail: 'anas2@gmail.com', password: '1234' }
     const { getUser } = useContext(userContext)
     let navigate = useNavigate();
     const onSubmit = async (e) => {
@@ -18,7 +19,7 @@ export default function UserLogin() {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                email: credential.email, password: credential.password
+                email: credential.email !== '' ? credential.email : domyCredential.domyEmail, password: credential.password !== '' ? credential.password : domyCredential.password
             })
         })
         const data = await response.json();
@@ -37,6 +38,11 @@ export default function UserLogin() {
         setCredential({ ...credential, [e.target.name]: e.target.value })
     }
 
+    let redirectSignup = () => {
+        navigate("/signup")
+    }
+
+
     return (
         <div className='container my-5'>
             <div className="container text-center"><h1><b>Login</b></h1></div>
@@ -49,8 +55,9 @@ export default function UserLogin() {
                     <label htmlFor="password" className="form-label">Password</label>
                     <input type="password" className="form-control" id="password" name='password' onChange={onChange} value={credential.password} />
                 </div>
-                <button type="submit" className="btn btn-primary">Login</button>
-                <button type="button" className="btn btn-danger ms-3">Demo User</button>
+                <button type="submit" className="btn btn-primary">Submit</button>
+                {/* <button type="button" onClick={onSubmit} className="btn btn-danger ms-3">Demo User</button> */}
+                <button type="button" onClick={redirectSignup} className="mx-3 btn btn-warning">Go to sign-up</button>
             </form>
         </div>
     )

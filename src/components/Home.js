@@ -5,7 +5,7 @@ import Product from './Product'
 export default function Home() {
     //const shops = useContext(shopContext)
     const { getProduct } = useContext(productContext)
-
+    // console.log(token)
     useEffect(() => {
         getProduct()
         // eslint-disable-next-line
@@ -36,7 +36,7 @@ export default function Home() {
                 </button>
             </div>
             <div className="container my-3">
-                <h1>Products</h1>
+                <h1>All Products</h1>
                 {/* <div className="container" >
                 {shops.map((shop) => {
                     return <h3>{shop.name}</h3>
