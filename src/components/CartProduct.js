@@ -52,7 +52,7 @@ export default function CartProduct() {
                   <td>
                     <div>
                       <img src={`./images/${Product.product.image}`} style={{ minWidth: '30px', maxWidth: '30px', minHeight: '30px', maxHeight: '30px' }} alt={Product.product.image} /> {Product.product.name}</div></td>
-                  <td>{Product.price}</td>
+                  <td>₹{Product.price}</td>
                   <td className='cart_quantity'>
                     <button className='btn btn-warning me-1 px-2 py-0' style={{ fontSize: '15px' }} onClick={() => { RemoveQuantity(Product.product._id) }} disabled={Product.price === Product.product.price}>-</button> {/*  */}
                     <span style={{ fontSize: '25px' }}>{Product.quantity}</span>
